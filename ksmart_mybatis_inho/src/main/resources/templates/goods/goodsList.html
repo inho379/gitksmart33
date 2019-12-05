@@ -4,16 +4,16 @@
       layout:decorate="~{layout/default}">
 
 <th:block layout:fragment="customTitle">
-	<title>회원목록</title>
+	<title>�쉶�썝紐⑸줉</title>
 </th:block>
 <th:block layout:fragment="customContents">
 	<table border="1">
 		<tr>
-			<td>상품</td>
-			<td>카테고리</td>
-			<td>가격</td>
-			<td>색상</td>
-			<td>사이즈</td>
+			<td>왜</td>
+			<td>어떻게</td>
+			<td>어디서</td>
+			<td>칵테일</td>
+			<td>�궗�씠利�</td>
 		</tr>
 		<tr th:each="g : ${goodsList}">
 			<td th:text="${g.goodsName}"></td>
