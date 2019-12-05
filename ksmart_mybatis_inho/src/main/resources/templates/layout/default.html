@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!-- head.html 조각이름:headFragment -->
+<head th:replace="fragments/head :: headFragment"></head>
+
+<body>
+	<div id="wrapper">
+		<!-- header.html 조각 -->
+		<div th:replace="fragments/header :: headerFragment"></div>
+		<!-- leftmenu.html 조각 -->
+		<div th:replace="fragments/leftmenu :: leftmenuFragment"></div>	
+		
+		<div id="rightcolumn">
+			<th:block layout:fragment="customContents"></th:block>
+		</div>
+		
+		<div th:replace="fragments/footer :: footerFragment"></div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ksmart.ksmart_mybatis.mapper.MemberMapper">
+	<resultMap type="kr.or.ksmart.ksmart_mybatis.vo.Member" id="memberResultMap">
+		<result property="memberId" column="m_id"/>
+		<result property="memberPw" column="m_pw"/>
+		<result property="memberLevel" column="m_level"/>
+		<result property="memberName" column="m_name"/>
+		<result property="memberEmail" column="m_Email"/>	
+	</resultMap>
+	<select id="getMemberList" resultMap="memberResultMap">
+			SELECT 
+				*
+			FROM 
+				tb_member
+	</select>
+	<select id="getMemberList1" resultType="kr.or.ksmart.ksmart_mybatis.vo.Member">
+	<!--쿼리문을 리턴타입에 담아둔다.  -->
+		SELECT 
+			 m_id 		as memberId
+			,m_pw 		as memberPw
+			,m_level	as memberLevel
+			,m_name		as memberName
+			,m_email	as memberEmail
+		FROM 
+			tb_member
+	</select>
+	 <insert id="addMemberInsert" parameterType="kr.or.ksmart.ksmart_mybatis.vo.Member">
+	 	insert into
+	 		tb_member
+	 		(m_id,m_pw,m_level,m_name,m_email)
+ 		values
+ 			(#{memberId}
+ 			,#{memberPw}
+ 			,#{memberLevel}
+ 			,#{memberName}
+ 			,#{memberEmail}
+ 		)
+	 </insert>
+	
+	 <update id="updateMember" parameterType="kr.or.ksmart.ksmart_mybatis.vo.Member">
+	 		UPDATE tb_member
+		SET
+			 m_pw	= #{memberPw}
+			,m_level= #{memberLevel}
+			,m_name	= #{memberName}
+			,m_email= #{memberEmail}
+		WHERE 
+			 m_id = #{memberId}
+	 </update>
+	 
+
+	  <delete id="deleteMember" parameterType="kr.or.ksmart.ksmart_mybatis.vo.Member">
+		delete 
+			from
+		tb_member
+		where 
+			 m_id = #{memberId}
+	 </delete>
+	  <select id="deleteByMember" resultMap="memberResultMap">
+	  		SELECT 
+			*
+		FROM 
+			tb_member
+			where
+			 m_id=#{memberId}		
+	 </select>
+	 
+	 <select id="selectByMember" parameterType="String" resultType="kr.or.ksmart.ksmart_mybatis.vo.Member">
+	 	select
+	 	 m_id 		as memberId
+			,m_pw 		as memberPw
+			,m_level	as memberLevel
+			,m_name		as memberName
+			,m_email	as memberEmail
+	 	from
+	 		tb_member
+		where 
+			 m_id = #{memberId}
+ 	</select>
+  	<select id="getMemberSearchList" parameterType="String" resultType="kr.or.ksmart.ksmart_mybatis.vo.Member">
+	  	SELECT 
+			 m_id 		AS memberId
+			,m_pw 		AS memberPw
+			,m_level 	AS memberLevel
+			,m_name 	AS memberName
+			,m_email 	AS memberEmail
+		FROM tb_member
+		<if test="sv != null and sv neq ''.toString()">
+			WHERE 
+				${sk} Like CONCAT('%',#{sv},'%')		
+		</if>
+	</select>
+	
+	<select id="loginCheck" resultMap="memberResultMap">
+			SELECT 
+				*
+			FROM 
+				tb_member
+			Where 
+			 m_id = #{memberId}
+	</select>
+</mapper>

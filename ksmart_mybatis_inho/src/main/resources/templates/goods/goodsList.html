@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+
+<th:block layout:fragment="customTitle">
+	<title>회원목록</title>
+</th:block>
+<th:block layout:fragment="customContents">
+	<table border="1">
+		<tr>
+			<td>상품</td>
+			<td>카테고리</td>
+			<td>가격</td>
+			<td>색상</td>
+			<td>사이즈</td>
+		</tr>
+		<tr th:each="g : ${goodsList}">
+			<td th:text="${g.goodsName}"></td>
+			<td th:text="${g.goodsCate}"></td>
+			<td th:text="${g.goodsPrice}"></td>
+			<td th:text="${g.goodsColor}"></td>
+			<td th:text="${g.goodsSize}"></td>	
+		</tr> 
+	</table>
+</th:block>
+</html>
